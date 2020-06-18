@@ -1,8 +1,8 @@
 import React from 'react';
-import PlacesList from './PlacesList';
 import { withFirebase } from '../Firebase'; 
 import { withStyles } from '@material-ui/core/styles'
 import Place from '../../models/Place';
+import PlacesTable from './PlacesTable';
 
 const styles = theme => ({
 
@@ -23,7 +23,7 @@ class Places extends React.Component {
                     var places = []
                     querySnapshot.forEach(function(doc) {
                         let data = doc.data()
-                        let newPlace = new Place(doc.id, data.placeId, data.name)
+                        let newPlace = new Place(doc.id, data.googlePlaceId, data.name)
                         places.push(newPlace)
                     })
 
@@ -47,7 +47,7 @@ class Places extends React.Component {
     render() {
         return (
             <div>
-                <PlacesList
+                <PlacesTable
                     places={this.state.places}
                 />
             </div>
