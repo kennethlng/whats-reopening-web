@@ -1,13 +1,13 @@
 import React from 'react';
 import List from '@material-ui/core/List';
-import PlacesListRow from './PlacesListRow'; 
+import PlacesListItem from './PlacesListItem'; 
 
 const PlacesList = (props) => {
     const { places } = props; 
     return (
         <List>
             {places.map(place => (
-                <PlacesListRow
+                <PlacesListItem
                     place={place}
                 />
             ))}

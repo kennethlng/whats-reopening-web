@@ -2,7 +2,7 @@ import React from 'react';
 import { withFirebase } from '../Firebase'; 
 import { withStyles } from '@material-ui/core/styles'
 import Place from '../../models/Place';
-import PlacesTable from './PlacesTable';
+import PlacesList from './PlacesList'; 
 
 const styles = theme => ({
 
@@ -47,7 +47,7 @@ class Places extends React.Component {
     render() {
         return (
             <div>
-                <PlacesTable
+                <PlacesList
                     places={this.state.places}
                 />
             </div>

@@ -6,13 +6,11 @@ import { Main } from '../Main';
 import { FirebaseContext, Firebase } from '../Firebase'; 
 
 const App = () => (
-    <div>
-        <FirebaseContext.Provider value={new Firebase()}>   
-            <Router>
-                <Main/>
-            </Router>
-        </FirebaseContext.Provider>
-    </div>
+    <FirebaseContext.Provider value={new Firebase()}>   
+        <Router>
+            <Main/>
+        </Router>
+    </FirebaseContext.Provider>
 )
 
 export default App; 
