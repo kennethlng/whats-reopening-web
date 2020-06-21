@@ -2,7 +2,8 @@ import React from 'react';
 import { withFirebase } from '../Firebase'; 
 import { withStyles } from '@material-ui/core/styles'
 import Place from '../../models/Place';
-import PlacesList from './PlacesList'; 
+import PlacesGrid from './PlacesGrid';
+import { PlacesContext } from './context'; 
 
 const styles = theme => ({
 
@@ -15,6 +16,10 @@ class Places extends React.Component {
     }
 
     componentDidMount() {
+        this.fetch()
+    }
+
+    fetch() {
         this.setState({
             loading: true
         }, () => {
@@ -46,11 +51,11 @@ class Places extends React.Component {
 
     render() {
         return (
-            <div>
-                <PlacesList
+            <PlacesContext.Provider value={{ places: this.state.places }}>    
+                <PlacesGrid
                     places={this.state.places}
                 />
-            </div>
+            </PlacesContext.Provider>
         )
     }
 }
