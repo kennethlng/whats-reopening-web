@@ -24,7 +24,7 @@ export default function PlacesGrid() {
             <Grid container spacing={3}>
                 <Grid container item xs={6} spacing={3}>
                     {context.places.map(place => (
-                        <Grid item xs={12}>
+                        <Grid item xs={12} key={place.id}>
                             <PlacesGridListCard place={place}/>
                         </Grid>
                     ))}
