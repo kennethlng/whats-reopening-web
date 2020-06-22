@@ -1,5 +1,4 @@
 import firebase from 'firebase'; 
-import * as DB from '../../constants/database'; 
 
 const firebaseConfig = {
     apiKey: "AIzaSyCGNMrxkBiJo-cja1XOWJJV_JmpWMFd4Pc",
@@ -12,14 +11,7 @@ const firebaseConfig = {
     measurementId: "G-5K927XZWEF"
 };
 
-class Firebase {
-    constructor() {
-        firebase.initializeApp(firebaseConfig)
-        this.db = firebase.firestore()
-    }
+firebase.initializeApp(firebaseConfig); 
+const db = firebase.firestore(); 
 
-    place = (id) => this.db.collection(DB.PLACES).doc(id)
-    places = () => this.db.collection(DB.PLACES)
-}
-
-export default Firebase; 
+export { db };

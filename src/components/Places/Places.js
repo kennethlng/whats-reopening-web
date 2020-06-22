@@ -1,9 +1,10 @@
 import React from 'react';
-import { withFirebase } from '../Firebase'; 
 import { withStyles } from '@material-ui/core/styles'
 import Place from '../../models/Place';
 import PlacesGrid from './PlacesGrid';
 import { PlacesContext } from './context'; 
+import * as api from '../../api'; 
+import * as DB_CONSTANTS from '../../constants/database'; 
 
 const styles = theme => ({
 
@@ -23,7 +24,7 @@ class Places extends React.Component {
         this.setState({
             loading: true
         }, () => {
-            this.props.firebase.places().get() 
+            api.placesApi.places().orderBy(DB_CONSTANTS.OPENING_DATE).limit(10).get()
                 .then(function(querySnapshot) {
                     var places = []
                     querySnapshot.forEach(function(doc) {
@@ -60,4 +61,4 @@ class Places extends React.Component {
     }
 }
 
-export default withFirebase(withStyles(styles)(Places)); 
+export default withStyles(styles)(Places); 
