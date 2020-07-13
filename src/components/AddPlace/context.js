@@ -9,7 +9,8 @@ const AddPlaceContext = React.createContext({
     affiliateEmail: '',
     notes: '',
     update: () => null,
-    updateStatus: (status) => null
+    updateStatus: (status) => null,
+    updateOpeningDate: (date) => null
 });
 
 export { AddPlaceContext }

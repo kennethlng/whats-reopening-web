@@ -3,6 +3,7 @@ import { AddPlaceContext } from './context';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField'; 
 import StatusSelect from './StatusSelect';
+import OpeningDatePicker from './OpeningDatePicker'; 
 
 const styles = theme => ({
     root: {
@@ -45,12 +46,14 @@ class AddPlace extends React.Component {
                     affiliateName, 
                     affiliateEmail, 
                     update: this.update, 
-                    updateStatus: (status) => this.setState({ status })  
+                    updateStatus: (status) => this.setState({ status }),
+                    updateOpeningDate: (date) => this.setState({ openingDate: date })
                 }}
             >
                 <form className={classes.root} noValidate autoComplete="off">
                     <TextField variant="outlined" label="Place name" required onChange={(e) => this.setState({ name: e.target.value })}/>
                     <StatusSelect/>
+                    <OpeningDatePicker/>
                 </form>
             </AddPlaceContext.Provider>
         )
