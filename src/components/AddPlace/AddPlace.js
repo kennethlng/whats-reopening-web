@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField'; 
 import StatusSelect from './StatusSelect';
 import OpeningDatePicker from './OpeningDatePicker'; 
+import Affiliate from './Affiliate'; 
 
 const styles = theme => ({
     root: {
@@ -47,13 +48,16 @@ class AddPlace extends React.Component {
                     affiliateEmail, 
                     update: this.update, 
                     updateStatus: (status) => this.setState({ status }),
-                    updateOpeningDate: (date) => this.setState({ openingDate: date })
+                    updateOpeningDate: (date) => this.setState({ openingDate: date }),
+                    updateAffiliateName: (name) => this.setState({ affiliateName: name }),
+                    updateAffiliateEmail: (email) => this.setState({ affiliateEmail: email })
                 }}
             >
                 <form className={classes.root} noValidate autoComplete="off">
                     <TextField variant="outlined" label="Place name" required onChange={(e) => this.setState({ name: e.target.value })}/>
                     <StatusSelect/>
                     <OpeningDatePicker/>
+                    <Affiliate/>
                 </form>
             </AddPlaceContext.Provider>
         )
