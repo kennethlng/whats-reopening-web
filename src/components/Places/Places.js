@@ -5,6 +5,7 @@ import PlacesGrid from './PlacesGrid';
 import { PlacesContext } from './context'; 
 import * as api from '../../api'; 
 import * as DB_CONSTANTS from '../../constants/database'; 
+import PlacesFilters from './PlacesFilters'; 
 
 const styles = theme => ({
 
@@ -24,7 +25,10 @@ class Places extends React.Component {
         this.setState({
             loading: true
         }, () => {
-            api.placesApi.places().orderBy(DB_CONSTANTS.OPENING_DATE).limit(10).get()
+            var query = api.placesApi.places()
+            query = query.orderBy(DB_CONSTANTS.OPENING_DATE)
+            query = query.limit(10)
+            query.get()
                 .then(function(querySnapshot) {
                     var places = []
                     querySnapshot.forEach(function(doc) {
@@ -50,12 +54,15 @@ class Places extends React.Component {
         })
     }
 
+    updateFilters() {
+        console.log("filters updated")
+    }
+
     render() {
         return (
-            <PlacesContext.Provider value={{ places: this.state.places }}>    
-                <PlacesGrid
-                    places={this.state.places}
-                />
+            <PlacesContext.Provider value={{ places: this.state.places, updateFilters: this.updateFilters }}>    
+                <PlacesFilters />
+                <PlacesGrid />
             </PlacesContext.Provider>
         )
     }
