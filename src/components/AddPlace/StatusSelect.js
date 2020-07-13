@@ -23,7 +23,7 @@ export default function StatusSelect() {
 
     return (
         <div>
-            <FormControl className={classes.formControl}>
+            <FormControl fullWidth className={classes.formControl}>
                 <InputLabel>Current status</InputLabel>
                 <Select
                     value={context.status}
