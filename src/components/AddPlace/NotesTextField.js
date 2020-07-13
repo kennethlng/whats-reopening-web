@@ -18,6 +18,7 @@ export default function NotesTextField() {
             multiline
             onChange={handleChange}
             fullWidth
+            disabled={context.loading}
         />
     )
 }

@@ -7,6 +7,6 @@ export default function NameTextField() {
     const handleChange = e => context.updateName(e.target.value); 
 
     return (
-        <TextField fullWidth label="Place name" required onChange={handleChange}/>
+        <TextField fullWidth label="Place name" required onChange={handleChange} disabled={context.loading}/>
     )
 }

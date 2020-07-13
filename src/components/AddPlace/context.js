@@ -1,6 +1,7 @@
 import React from 'react';
 
 const AddPlaceContext = React.createContext({
+    loading: false, 
     name: '',
     status: '',
     openingDate: '',

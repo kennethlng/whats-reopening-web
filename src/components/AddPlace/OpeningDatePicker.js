@@ -14,6 +14,7 @@ export default function OpeningDatePicker() {
     return (
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <KeyboardDatePicker
+                disabled={context.loading}
                 fullWidth
                 disableToolbar
                 variant="inline"

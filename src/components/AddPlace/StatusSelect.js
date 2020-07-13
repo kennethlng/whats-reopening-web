@@ -26,6 +26,7 @@ export default function StatusSelect() {
             <FormControl fullWidth className={classes.formControl}>
                 <InputLabel>Current status</InputLabel>
                 <Select
+                    disabled={context.loading}
                     value={context.status}
                     onChange={handleChange}
                 >

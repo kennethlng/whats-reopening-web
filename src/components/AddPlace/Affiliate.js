@@ -34,7 +34,7 @@ export default function Affiliate() {
 
     return (
         <div>
-            <FormControl fullWidth>
+            <FormControl fullWidth disabled={context.loading}>
                 <FormLabel>Are you affiliated with the place, for example, as the owner or as an employee?</FormLabel>
                 <RadioGroup value={value} onChange={handleRadioChange}>
                     {options.map(option => <FormControlLabel key={option} value={option} control={<Radio/>} label={option}/>)}
@@ -42,10 +42,10 @@ export default function Affiliate() {
             </FormControl>
             {value === "Yes" ? 
                 <div>
-                    <FormControl fullWidth>
+                    <FormControl fullWidth disabled={context.loading}>
                         <TextField label="Name" variant="outlined" onChange={handleNameChange} />
                     </FormControl>
-                    <FormControl fullWidth>
+                    <FormControl fullWidth disabled={context.loading}>
                         <TextField label="Email" variant="outlined" onChange={handleEmailChange} />
                     </FormControl>
                 </div>
