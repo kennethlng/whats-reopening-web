@@ -8,7 +8,7 @@ const AddPlaceContext = React.createContext({
     affiliateName: '',
     affiliateEmail: '',
     notes: '',
-    update: () => null,
+    updateName: (name) => null,
     updateStatus: (status) => null,
     updateOpeningDate: (date) => null,
     updateAffiliateName: (name) => null,

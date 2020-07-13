@@ -1,7 +1,7 @@
 import React from 'react';
 import { AddPlaceContext } from './context';
 import { withStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField'; 
+import NameTextField from './NameTextField'; 
 import StatusSelect from './StatusSelect';
 import OpeningDatePicker from './OpeningDatePicker'; 
 import Affiliate from './Affiliate'; 
@@ -47,7 +47,7 @@ class AddPlace extends React.Component {
                     isAffiliated, 
                     affiliateName, 
                     affiliateEmail, 
-                    update: this.update, 
+                    updateName: (name) => this.setState({ name }),
                     updateStatus: (status) => this.setState({ status }),
                     updateOpeningDate: (date) => this.setState({ openingDate: date }),
                     updateAffiliateName: (name) => this.setState({ affiliateName: name }),
@@ -56,7 +56,7 @@ class AddPlace extends React.Component {
                 }}
             >
                 <form className={classes.root} noValidate autoComplete="off">
-                    <TextField variant="outlined" label="Place name" required onChange={(e) => this.setState({ name: e.target.value })}/>
+                    <NameTextField/>
                     <StatusSelect/>
                     <OpeningDatePicker/>
                     <Affiliate/>
