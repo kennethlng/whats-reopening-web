@@ -33,11 +33,11 @@ export default function Affiliate() {
     const handleEmailChange = e => context.updateAffiliateEmail(e.target.value); 
 
     return (
-        <form>
+        <div>
             <FormControl fullWidth>
                 <FormLabel>Are you affiliated with the place, for example, as the owner or as an employee?</FormLabel>
                 <RadioGroup value={value} onChange={handleRadioChange}>
-                    {options.map(option => <FormControlLabel value={option} control={<Radio/>} label={option}/>)}
+                    {options.map(option => <FormControlLabel key={option} value={option} control={<Radio/>} label={option}/>)}
                 </RadioGroup>
             </FormControl>
             {value === "Yes" ? 
@@ -51,6 +51,6 @@ export default function Affiliate() {
                 </div>
                 : null
             }
-        </form>
+        </div>
     )
 }
