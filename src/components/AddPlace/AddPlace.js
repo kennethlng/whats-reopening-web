@@ -4,7 +4,7 @@ import SubmitResponseSnackbar from './SubmitResponseSnackbar';
 import { withStyles } from '@material-ui/core/styles';
 import * as api from '../../api'; 
 import * as CONSTANTS from '../../constants/database'; 
-import NameTextField from './NameTextField'; 
+import PlaceAutocomplete from './PlaceAutocomplete'; 
 import StatusSelect from './StatusSelect';
 import OpeningDatePicker from './OpeningDatePicker'; 
 import Affiliate from './Affiliate'; 
@@ -28,7 +28,7 @@ const styles = theme => ({
 class AddPlace extends React.Component {
     state = {
         loading: false, 
-        name: '',
+        googlePlacePrediction: null,
         status: '',
         openingDate: '',
         isAffiliated: false,
@@ -42,14 +42,16 @@ class AddPlace extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault(); 
 
-        const { name, status, openingDate, isAffiliated, affiliateName, affiliateEmail, notes } = this.state; 
+        const { googlePlacePrediction, status, openingDate, isAffiliated, affiliateName, affiliateEmail, notes } = this.state; 
         const _this = this; 
 
         this.setState({
             loading: true
         }, () => {  
             api.placesApi.places().add({
-                [CONSTANTS.NAME]: name,
+                mainText: googlePlacePrediction.structured_formatting.main_text,
+                secondaryText: googlePlacePrediction.structured_formatting.secondary_text,
+                googlePlaceId: googlePlacePrediction.place_id,
                 [CONSTANTS.STATUS]: status,
                 [CONSTANTS.OPENING_DATE]: openingDate,
                 [CONSTANTS.IS_AFFILIATED]: isAffiliated,
@@ -83,7 +85,7 @@ class AddPlace extends React.Component {
 
     render() {
         const { classes } = this.props; 
-        const { loading, name, status, openingDate, isAffiliated, affiliateName, affiliateEmail, snackbarMessage, snackbarOpen } = this.state; 
+        const { loading, googlePlacePrediction, status, openingDate, isAffiliated, affiliateName, affiliateEmail, snackbarMessage, snackbarOpen } = this.state; 
 
         return (
             <React.Fragment>
@@ -91,13 +93,13 @@ class AddPlace extends React.Component {
                 <AddPlaceContext.Provider 
                     value={{
                         loading, 
-                        name, 
+                        googlePlacePrediction,
                         status, 
                         openingDate, 
                         isAffiliated, 
                         affiliateName, 
                         affiliateEmail, 
-                        updateName: (name) => this.setState({ name }),
+                        updateGooglePlace: (prediction) => this.setState({ googlePlacePrediction: prediction }),
                         updateStatus: (status) => this.setState({ status }),
                         updateOpeningDate: (date) => this.setState({ openingDate: date }),
                         updateAffiliateName: (name) => this.setState({ affiliateName: name }),
@@ -107,7 +109,7 @@ class AddPlace extends React.Component {
                 >
                     <Container maxWidth="sm">
                         <form className={classes.root} noValidate autoComplete="off" onSubmit={this.handleSubmit}>
-                            <NameTextField/>
+                            <PlaceAutocomplete/>
                             <StatusSelect/>
                             <OpeningDatePicker/>
                             <Affiliate/>
