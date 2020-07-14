@@ -1,19 +1,19 @@
 import React from 'react';
 import { AddPlaceContext } from './context';
+import SubmitResponseSnackbar from './SubmitResponseSnackbar'; 
 import { withStyles } from '@material-ui/core/styles';
+import * as api from '../../api'; 
+import * as CONSTANTS from '../../constants/database'; 
 import NameTextField from './NameTextField'; 
 import StatusSelect from './StatusSelect';
 import OpeningDatePicker from './OpeningDatePicker'; 
 import Affiliate from './Affiliate'; 
 import NotesTextField from './NotesTextField';
-import * as api from '../../api'; 
-import * as CONSTANTS from '../../constants/database'; 
+import Container from '@material-ui/core/Container'; 
 import Button from '@material-ui/core/Button'; 
 import Backdrop from '@material-ui/core/Backdrop'; 
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Snackbar from '@material-ui/core/Snackbar';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 const styles = theme => ({
     root: {
@@ -35,6 +35,7 @@ class AddPlace extends React.Component {
         affiliateName: '',
         affiliateEmail: '',
         notes: '',
+        snackbarMessage: '',
         snackbarOpen: false
     }
 
@@ -61,11 +62,17 @@ class AddPlace extends React.Component {
             .then(function(docRef) {
                 _this.setState({ 
                     loading: false,
+                    snackbarMessage: "Place successfully added",
                     snackbarOpen: true
                 })
             })
             .catch(function(error) {
                 console.log("Error adding place: ", error); 
+                _this.setState({
+                    loading: false,
+                    snackbarMessage: "Error adding place",
+                    snackbarOpen: true
+                })
             })
         })
     }
@@ -76,57 +83,50 @@ class AddPlace extends React.Component {
 
     render() {
         const { classes } = this.props; 
-        const { loading, name, status, openingDate, isAffiliated, affiliateName, affiliateEmail, snackbarOpen } = this.state; 
+        const { loading, name, status, openingDate, isAffiliated, affiliateName, affiliateEmail, snackbarMessage, snackbarOpen } = this.state; 
 
         return (
-            <AddPlaceContext.Provider 
-                value={{
-                    loading, 
-                    name, 
-                    status, 
-                    openingDate, 
-                    isAffiliated, 
-                    affiliateName, 
-                    affiliateEmail, 
-                    updateName: (name) => this.setState({ name }),
-                    updateStatus: (status) => this.setState({ status }),
-                    updateOpeningDate: (date) => this.setState({ openingDate: date }),
-                    updateAffiliateName: (name) => this.setState({ affiliateName: name }),
-                    updateAffiliateEmail: (email) => this.setState({ affiliateEmail: email }),
-                    updateNotes: (notes) => this.setState({ notes })
-                }}
-            >
-                <form className={classes.root} noValidate autoComplete="off" onSubmit={this.handleSubmit}>
-                    <NameTextField/>
-                    <StatusSelect/>
-                    <OpeningDatePicker/>
-                    <Affiliate/>
-                    <NotesTextField/>
-                    <Button variant="contained" color="secondary" type="submit" disabled={loading}>
-                        Submit
-                    </Button>
-                </form>
-                <Backdrop className={classes.backdrop} open={loading}>
-                    <CircularProgress color="inherit"/>
-                </Backdrop>
-                <Snackbar
-                    anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'left',
+            <React.Fragment>
+                <CssBaseline/>
+                <AddPlaceContext.Provider 
+                    value={{
+                        loading, 
+                        name, 
+                        status, 
+                        openingDate, 
+                        isAffiliated, 
+                        affiliateName, 
+                        affiliateEmail, 
+                        updateName: (name) => this.setState({ name }),
+                        updateStatus: (status) => this.setState({ status }),
+                        updateOpeningDate: (date) => this.setState({ openingDate: date }),
+                        updateAffiliateName: (name) => this.setState({ affiliateName: name }),
+                        updateAffiliateEmail: (email) => this.setState({ affiliateEmail: email }),
+                        updateNotes: (notes) => this.setState({ notes })
                     }}
-                    open={snackbarOpen}
-                    autoHideDuration={6000}
-                    onClose={this.handleSnackbarClose}
-                    message="Place successfully added "
-                    action={
-                        <React.Fragment>
-                            <IconButton size="small" aria-label="close" color="inherit" onClick={this.handleSnackbarClose}>
-                                <CloseIcon fontSize="small" />
-                            </IconButton>
-                        </React.Fragment>
-                    }
-                />
-            </AddPlaceContext.Provider>
+                >
+                    <Container maxWidth="sm">
+                        <form className={classes.root} noValidate autoComplete="off" onSubmit={this.handleSubmit}>
+                            <NameTextField/>
+                            <StatusSelect/>
+                            <OpeningDatePicker/>
+                            <Affiliate/>
+                            <NotesTextField/>
+                            <Button variant="contained" color="secondary" type="submit" disabled={loading}>
+                                Submit
+                            </Button>
+                        </form>
+                    </Container>
+                    <Backdrop className={classes.backdrop} open={loading}>
+                        <CircularProgress color="inherit"/>
+                    </Backdrop>
+                    <SubmitResponseSnackbar
+                        message={snackbarMessage}
+                        open={snackbarOpen}
+                        onClose={this.handleSnackbarClose}  
+                    />
+                </AddPlaceContext.Provider>
+            </React.Fragment>
         )
     }
 }
