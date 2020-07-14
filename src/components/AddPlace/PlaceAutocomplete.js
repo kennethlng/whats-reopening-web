@@ -18,7 +18,6 @@ const styles = (theme) => ({
 
 class PlaceAutocomplete extends React.Component {
     state = {
-        value: null,
         inputValue: '',
         timeout: 0,
         options: []
@@ -27,10 +26,9 @@ class PlaceAutocomplete extends React.Component {
     handleChange = (e, value) => {
         const { options } = this.state; 
 
-        this.props.addPlaceContext.updateGooglePlace(value); 
+        this.props.addPlaceContextValue.updateGooglePlacePrediction(value); 
 
         this.setState({
-            value,
             options: value ? [value, ...options] : options
         })
     }
@@ -51,12 +49,12 @@ class PlaceAutocomplete extends React.Component {
     }
 
     fetch(inputValue) {
-        const { value } = this.state; 
+        const { googlePlacePrediction } = this.props.addPlaceContextValue; 
         const _this = this; 
 
         if (inputValue === '') {
             this.setState({
-                options: value ? [value] : []
+                options: googlePlacePrediction ? [googlePlacePrediction] : []
             })
             return 
         }
@@ -65,8 +63,8 @@ class PlaceAutocomplete extends React.Component {
         .then(function(response) {
             let newOptions = []
 
-            if (value) {
-                newOptions = [value]
+            if (googlePlacePrediction) {
+                newOptions = [googlePlacePrediction]
             }
 
             if (response.data) {
@@ -83,7 +81,7 @@ class PlaceAutocomplete extends React.Component {
     }
 
     render() {
-        const { value, options } = this.state; 
+        const { googlePlacePrediction, options } = this.state; 
         const { classes } = this.props; 
 
         return (
@@ -98,7 +96,7 @@ class PlaceAutocomplete extends React.Component {
                         filterSelectedOptions
                         onInputChange={this.handleInputValueChange}
                         onChange={this.handleChange}
-                        value={value}
+                        value={googlePlacePrediction}
                         renderInput={(params) => <TextField {...params} fullWidth label="Place name" required disabled={context.loading}/>}
                         renderOption={(option) => {
                             const matches = option.structured_formatting.main_text_matched_substrings;

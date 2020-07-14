@@ -10,7 +10,7 @@ const AddPlaceContext = React.createContext({
     affiliateEmail: '',
     notes: '',
     updateStatus: (status) => null,
-    updateGooglePlace: (prediction) => null,
+    updateGooglePlacePrediction: (prediction) => null,
     updateOpeningDate: (date) => null,
     updateAffiliateName: (name) => null,
     updateAffiliateEmail: (email) => null,
@@ -19,7 +19,7 @@ const AddPlaceContext = React.createContext({
 
 export const withAddPlace = Component => props => (
     <AddPlaceContext.Consumer>
-        {(value) => <Component {...props} addPlaceContext={value} />}
+        {(value) => <Component {...props} addPlaceContextValue={value} />}
     </AddPlaceContext.Consumer>
 )
 

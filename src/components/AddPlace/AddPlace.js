@@ -49,9 +49,9 @@ class AddPlace extends React.Component {
             loading: true
         }, () => {  
             api.placesApi.places().add({
-                mainText: googlePlacePrediction.structured_formatting.main_text,
-                secondaryText: googlePlacePrediction.structured_formatting.secondary_text,
-                googlePlaceId: googlePlacePrediction.place_id,
+                [CONSTANTS.MAIN_TEXT]: googlePlacePrediction.structured_formatting.main_text,
+                [CONSTANTS.SECONDARY_TEXT]: googlePlacePrediction.structured_formatting.secondary_text,
+                [CONSTANTS.GOOGLE_PLACE_ID]: googlePlacePrediction.place_id,
                 [CONSTANTS.STATUS]: status,
                 [CONSTANTS.OPENING_DATE]: openingDate,
                 [CONSTANTS.IS_AFFILIATED]: isAffiliated,
@@ -99,7 +99,7 @@ class AddPlace extends React.Component {
                         isAffiliated, 
                         affiliateName, 
                         affiliateEmail, 
-                        updateGooglePlace: (prediction) => this.setState({ googlePlacePrediction: prediction }),
+                        updateGooglePlacePrediction: (prediction) => this.setState({ googlePlacePrediction: prediction }),
                         updateStatus: (status) => this.setState({ status }),
                         updateOpeningDate: (date) => this.setState({ openingDate: date }),
                         updateAffiliateName: (name) => this.setState({ affiliateName: name }),
