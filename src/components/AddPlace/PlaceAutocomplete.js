@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { AddPlaceContext, withAddPlace } from './context';
 import TextField from '@material-ui/core/TextField'; 
 import Autocomplete from '@material-ui/lab/Autocomplete';

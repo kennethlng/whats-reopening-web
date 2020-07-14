@@ -1,31 +1,16 @@
 import React, { useContext } from 'react';
 import { AddPlaceContext} from './context'; 
-import { makeStyles } from '@material-ui/core/styles';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import Input from '@material-ui/core/Input';
-import OutlinedInput from '@material-ui/core/OutlinedInput'; 
-import InputLabel from '@material-ui/core/InputLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
-
-const useStyles = makeStyles((theme) => ({
-    formControl: {
-      margin: theme.spacing(3),
-    },
-    button: {
-      margin: theme.spacing(1, 1, 0, 0),
-    },
-}));
 
 const options = ["Yes", "No"]
 
 export default function Affiliate() {
     const context = useContext(AddPlaceContext); 
-    const classes = useStyles(); 
     const [value, setValue] = React.useState(options[options.length - 1])
 
     const handleRadioChange = e => setValue(e.target.value); 
