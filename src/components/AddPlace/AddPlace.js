@@ -10,6 +10,7 @@ import StatusSelect from './StatusSelect';
 import OpeningDatePicker from './OpeningDatePicker'; 
 import Affiliate from './Affiliate'; 
 import NotesTextField from './NotesTextField';
+import IsAffiliatedCheckbox from './IsAffiliatedCheckbox'; 
 import Container from '@material-ui/core/Container'; 
 import Button from '@material-ui/core/Button'; 
 import Backdrop from '@material-ui/core/Backdrop'; 
@@ -112,6 +113,7 @@ class AddPlace extends React.Component {
                         updateGooglePlacePrediction: (prediction) => this.setState({ googlePlacePrediction: prediction }),
                         updateStatus: (status) => this.setState({ status }),
                         updateOpeningDate: (date) => this.setState({ openingDate: date }),
+                        updateIsAffiliated: (isAffiliated) => this.setState({ isAffiliated }),
                         updateAffiliateName: (name) => this.setState({ affiliateName: name }),
                         updateAffiliateEmail: (email) => this.setState({ affiliateEmail: email }),
                         updateNotes: (notes) => this.setState({ notes })
@@ -130,7 +132,7 @@ class AddPlace extends React.Component {
                                     <OpeningDatePicker/>
                                 </Grid>
                                 <Grid item xs={12}>
-                                    <Affiliate/>
+                                    <IsAffiliatedCheckbox/>
                                 </Grid>
                                 <Grid item xs={12}>
                                     <NotesTextField/>

@@ -12,6 +12,7 @@ const AddPlaceContext = React.createContext({
     updateStatus: (status) => null,
     updateGooglePlacePrediction: (prediction) => null,
     updateOpeningDate: (date) => null,
+    updateIsAffiliated: (isAffiliated) => null,
     updateAffiliateName: (name) => null,
     updateAffiliateEmail: (email) => null,
     updateNotes: (notes) => null
