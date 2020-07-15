@@ -2,6 +2,7 @@ import React from 'react';
 import { AddPlaceContext } from './context';
 import SubmitResponseSnackbar from './SubmitResponseSnackbar'; 
 import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid'; 
 import * as api from '../../api'; 
 import * as CONSTANTS from '../../constants/database'; 
 import PlaceAutocomplete from './PlaceAutocomplete'; 
@@ -16,12 +17,20 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 const styles = theme => ({
-    root: {
-
+    form: {
+        width: '100%',
+        marginTop: theme.spacing(3)
     },
     backdrop: {
         zIndex: theme.zIndex.drawer + 1,
         color: '#fff'
+    },
+    buttonContainer: {
+        display: 'flex',
+        justifyContent: 'flex-end'
+    },
+    submit: {
+        margin: theme.spacing(3, 0, 2)
     }
 })
 
@@ -42,41 +51,42 @@ class AddPlace extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault(); 
 
+        console.log("Sbumit")
         const { googlePlacePrediction, status, openingDate, isAffiliated, affiliateName, affiliateEmail, notes } = this.state; 
         const _this = this; 
 
-        this.setState({
-            loading: true
-        }, () => {  
-            api.placesApi.places().add({
-                [CONSTANTS.MAIN_TEXT]: googlePlacePrediction.structured_formatting.main_text,
-                [CONSTANTS.SECONDARY_TEXT]: googlePlacePrediction.structured_formatting.secondary_text,
-                [CONSTANTS.GOOGLE_PLACE_ID]: googlePlacePrediction.place_id,
-                [CONSTANTS.STATUS]: status,
-                [CONSTANTS.OPENING_DATE]: openingDate,
-                [CONSTANTS.IS_AFFILIATED]: isAffiliated,
-                [CONSTANTS.AFFILIATE]: {
-                    [CONSTANTS.NAME]: affiliateName,
-                    [CONSTANTS.EMAIL]: affiliateEmail
-                },
-                [CONSTANTS.NOTES]: notes
-            })
-            .then(function(docRef) {
-                _this.setState({ 
-                    loading: false,
-                    snackbarMessage: "Place successfully added",
-                    snackbarOpen: true
-                })
-            })
-            .catch(function(error) {
-                console.log("Error adding place: ", error); 
-                _this.setState({
-                    loading: false,
-                    snackbarMessage: "Error adding place",
-                    snackbarOpen: true
-                })
-            })
-        })
+        // this.setState({
+        //     loading: true
+        // }, () => {  
+        //     api.placesApi.places().add({
+        //         [CONSTANTS.MAIN_TEXT]: googlePlacePrediction.structured_formatting.main_text,
+        //         [CONSTANTS.SECONDARY_TEXT]: googlePlacePrediction.structured_formatting.secondary_text,
+        //         [CONSTANTS.GOOGLE_PLACE_ID]: googlePlacePrediction.place_id,
+        //         [CONSTANTS.STATUS]: status,
+        //         [CONSTANTS.OPENING_DATE]: openingDate,
+        //         [CONSTANTS.IS_AFFILIATED]: isAffiliated,
+        //         [CONSTANTS.AFFILIATE]: {
+        //             [CONSTANTS.NAME]: affiliateName,
+        //             [CONSTANTS.EMAIL]: affiliateEmail
+        //         },
+        //         [CONSTANTS.NOTES]: notes
+        //     })
+        //     .then(function(docRef) {
+        //         _this.setState({ 
+        //             loading: false,
+        //             snackbarMessage: "Place successfully added",
+        //             snackbarOpen: true
+        //         })
+        //     })
+        //     .catch(function(error) {
+        //         console.log("Error adding place: ", error); 
+        //         _this.setState({
+        //             loading: false,
+        //             snackbarMessage: "Error adding place",
+        //             snackbarOpen: true
+        //         })
+        //     })
+        // })
     }
 
     handleSnackbarClose = () => {
@@ -108,15 +118,29 @@ class AddPlace extends React.Component {
                     }}
                 >
                     <Container maxWidth="sm">
-                        <form className={classes.root} noValidate autoComplete="off" onSubmit={this.handleSubmit}>
-                            <PlaceAutocomplete/>
-                            <StatusSelect/>
-                            <OpeningDatePicker/>
-                            <Affiliate/>
-                            <NotesTextField/>
-                            <Button variant="contained" color="secondary" type="submit" disabled={loading}>
-                                Submit
-                            </Button>
+                        <form className={classes.form} autoComplete="off" onSubmit={this.handleSubmit}>
+                            <Grid container spacing={4}>
+                                <Grid item xs={12}>
+                                    <PlaceAutocomplete/>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <StatusSelect/>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <OpeningDatePicker/>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Affiliate/>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <NotesTextField/>
+                                </Grid>
+                            </Grid>
+                            <div className={classes.buttonContainer}>
+                                <Button className={classes.submit} variant="contained" color="secondary" type="submit" disabled={loading}>
+                                    Submit
+                                </Button>
+                            </div>
                         </form>
                     </Container>
                     <Backdrop className={classes.backdrop} open={loading}>
