@@ -22,7 +22,7 @@ export default function StatusSelect() {
 
     return (
         <div>
-            <FormControl fullWidth className={classes.formControl}>
+            <FormControl variant="outlined" required fullWidth className={classes.formControl}>
                 <InputLabel>Current status</InputLabel>
                 <Select
                     disabled={context.loading}

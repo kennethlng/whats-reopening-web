@@ -9,10 +9,12 @@ export default function NotesTextField() {
     return (
         <TextField
             label="Additional notes"
+            variant="outlined"
             multiline
             onChange={handleChange}
             fullWidth
             disabled={context.loading}
+            helperText="Include other info that might help others, such as "
         />
     )
 }

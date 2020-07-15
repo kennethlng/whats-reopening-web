@@ -97,7 +97,17 @@ class PlaceAutocomplete extends React.Component {
                         onInputChange={this.handleInputValueChange}
                         onChange={this.handleChange}
                         value={googlePlacePrediction}
-                        renderInput={(params) => <TextField {...params} fullWidth label="Place name" required disabled={context.loading}/>}
+                        renderInput={(params) => 
+                            <TextField 
+                                {...params} 
+                                variant="outlined"
+                                fullWidth 
+                                label="Place name" 
+                                required 
+                                disabled={context.loading}
+                                helperText="As you start typing, select the option that best fits what you want."
+                            />
+                        }
                         renderOption={(option) => {
                             const matches = option.structured_formatting.main_text_matched_substrings;
                             const parts = parse(
