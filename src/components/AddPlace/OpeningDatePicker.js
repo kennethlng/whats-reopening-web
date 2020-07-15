@@ -5,11 +5,7 @@ import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/picker
 
 export default function OpeningDatePicker() {
     const context = useContext(AddPlaceContext); 
-    const [selectedDate, setSelectedDate] = React.useState(new Date());
-    const handleChange = (date) => {
-        setSelectedDate(date); 
-        context.updateOpeningDate(date);
-    }
+    const handleChange = (date) => context.updateOpeningDate(date);
 
     return (
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -20,7 +16,7 @@ export default function OpeningDatePicker() {
                 variant="inline"
                 format="MM/dd/yyyy"
                 margin="normal"
-                value={selectedDate}
+                value={context.openingDate}
                 onChange={handleChange}
                 KeyboardButtonProps={{
                     'aria-label': 'change date',

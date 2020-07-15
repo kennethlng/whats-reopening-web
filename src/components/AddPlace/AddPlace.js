@@ -30,7 +30,7 @@ class AddPlace extends React.Component {
         loading: false, 
         googlePlacePrediction: null,
         status: '',
-        openingDate: '',
+        openingDate: new Date(new Date().setHours(0, 0, 0, 0)),     //  Get today's midnight time as the default value
         isAffiliated: false,
         affiliateName: '',
         affiliateEmail: '',
@@ -95,7 +95,7 @@ class AddPlace extends React.Component {
                         loading, 
                         googlePlacePrediction,
                         status, 
-                        openingDate, 
+                        openingDate,
                         isAffiliated, 
                         affiliateName, 
                         affiliateEmail, 
