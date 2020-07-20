@@ -29,11 +29,11 @@ export default function StatusSelect() {
                     value={context.status}
                     onChange={handleChange}
                 >
-                    <MenuItem value={STATUS.OPEN}>Open</MenuItem>
-                    <MenuItem value={STATUS.LIMITED_OPEN}>Open but with limited capacity</MenuItem>
-                    <MenuItem value={STATUS.TEMPORARILY_CLOSED}>Temporarily closed</MenuItem>
-                    <MenuItem value={STATUS.PERMANENTLY_CLOSED}>Permanently closed</MenuItem>
-                    <MenuItem value={STATUS.OTHER}>Other</MenuItem>
+                    <MenuItem value={STATUS.OPEN.ID}>{STATUS.OPEN.TITLE}</MenuItem>
+                    <MenuItem value={STATUS.LIMITED_OPEN.ID}>{STATUS.LIMITED_OPEN.TITLE}</MenuItem>
+                    <MenuItem value={STATUS.TEMPORARILY_CLOSED.ID}>{STATUS.TEMPORARILY_CLOSED.TITLE}</MenuItem>
+                    <MenuItem value={STATUS.PERMANENTLY_CLOSED.ID}>{STATUS.PERMANENTLY_CLOSED.TITLE}</MenuItem>
+                    <MenuItem value={STATUS.OTHER.ID}>Other</MenuItem>
                 </Select>
             </FormControl>
             {context.status === STATUS.OTHER ? 
@@ -42,6 +42,7 @@ export default function StatusSelect() {
                     fullWidth
                     onChange={handleChange}
                     className={classes.other}
+                    // helperText="Can you describe the status of the place?"
                 />
                 : null
             }
