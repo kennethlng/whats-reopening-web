@@ -12,10 +12,12 @@ export default function NotesTextField() {
             variant="outlined"
             multiline
             rows={4}
+            value={context.notes}
             onChange={handleChange}
             fullWidth
             disabled={context.loading}
             placeholder="This restaurant has outdoor seating but limited indoor seating."
+            helperText="Please provide additional information that could help others."
         />
     )
 }

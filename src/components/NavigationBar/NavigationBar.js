@@ -1,13 +1,13 @@
 import React from 'react'; 
-import { withStyles } from '@material-ui/core/styles'; 
+import { makeStyles } from '@material-ui/core/styles'; 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button'; 
-import { withRouter } from 'react-router-dom'; 
+import { withRouter, useLocation } from 'react-router-dom'; 
 import * as ROUTES from '../../constants/routes';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({ 
     root: {
         flexGrow: 1,
     },
@@ -16,34 +16,37 @@ const styles = theme => ({
     },
     spacer: {
         flexGrow: 1,
-    },
-});
+    }  
+}))
 
-class NavigationBar extends React.Component {
-    handleLogoClick = () => this.props.history.push(ROUTES.LANDING)
-    handleAddPlaceClick = () => this.props.history.push(ROUTES.ADD_PLACE)
+function NavigationBar(props) {
+    const classes = useStyles(); 
+    const location = useLocation(); 
 
-    render() {
-        const { classes } = this.props; 
+    const handleLogoClick = () => props.history.push(ROUTES.LANDING)
+    const handleAddPlaceClick = () => props.history.push(ROUTES.ADD_PLACE)
 
-        return (
-            <div className={classes.root}>
-                <AppBar position="static">
-                    <Toolbar>
-                        <Button color="inherit" onClick={this.handleLogoClick}> 
-                            <Typography variant="h6">
-                                What's Reopening
-                            </Typography>
-                        </Button>
-                        <div className={classes.spacer}/>
-                        <Button color="inherit" onClick={this.handleAddPlaceClick}>
+    return (
+        <div className={classes.root}>
+            <AppBar position="static">
+                <Toolbar>
+                    <Button color="inherit" onClick={handleLogoClick}> 
+                        <Typography variant="h6">
+                            What's Reopening
+                        </Typography>
+                    </Button>
+                    <div className={classes.spacer}/>
+                    {location.pathname === ROUTES.ADD_PLACE ? 
+                        null
+                        :
+                        <Button color="inherit" onClick={handleAddPlaceClick}>
                             Add a place
                         </Button>
-                    </Toolbar>
-                </AppBar>
-            </div>
-        );
-    }
+                    }
+                </Toolbar>
+            </AppBar>
+        </div>
+    )
 }
 
-export default withRouter(withStyles(styles)(NavigationBar)); 
+export default withRouter(NavigationBar); 

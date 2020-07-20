@@ -1,71 +1,62 @@
-import React from 'react';
-import { withStyles } from '@material-ui/core/styles'
+import React, { useState, useContext, useEffect } from 'react';
+import { makeStyles } from '@material-ui/core/styles'
+import { FirebaseContext } from '../Firebase'; 
 import Place from '../../models/Place';
 import PlacesGrid from './PlacesGrid';
 import { PlacesContext } from './context'; 
-import * as api from '../../api'; 
-import * as DB_CONSTANTS from '../../constants/database'; 
+import * as CONSTANTS from '../../constants/places'; 
 import PlacesFilters from './PlacesFilters'; 
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
 
-})
+}))
 
-class Places extends React.Component {
-    state = {
-        loading: false,
-        places: []
-    }
+export default function Places() {
+    const [loading, setLoading] = useState(false);
+    const [places, setPlaces] = useState([]); 
+    const firebase = useContext(FirebaseContext); 
 
-    componentDidMount() {
-        this.fetch()
-    }
+    useEffect(() => {
+        fetch(); 
+    }, [])
 
-    fetch() {
-        this.setState({
-            loading: true
-        }, () => {
-            var query = api.placesApi.places()
-            query = query.orderBy(DB_CONSTANTS.OPENING_DATE)
-            query = query.limit(10)
-            query.get()
-                .then(function(querySnapshot) {
-                    var places = []
-                    querySnapshot.forEach(function(doc) {
-                        let data = doc.data()
-                        let newPlace = new Place(doc.id, data.googlePlaceId, data.name)
-                        places.push(newPlace)
-                    })
+    const fetch = () => {
+        setLoading(true); 
 
-                    return places
-                })
-                .then(places => {
-                    this.setState({
-                        places,
-                        loading: false
-                    })
-                })
-                .catch(error => {
-                    console.log(error)
-                    this.setState({
-                        loading: false
-                    })
-                })
+        var query = firebase.places()
+        query = query.orderBy(CONSTANTS.OPENING_DATE)
+        query = query.limit(10)
+        query.get()
+        .then(function(querySnapshot) {
+            var places = []
+            querySnapshot.forEach(function(doc) {
+                let data = doc.data()
+                let newPlace = new Place(doc.id, data.googlePlaceId, data.name)
+                places.push(newPlace)
+            })
+
+            setPlaces(places);
+            setLoading(false); 
+        })
+        .catch(error => {
+            console.log("Error loading places: ", error)
+            setLoading(false);
         })
     }
 
-    updateFilters() {
+    const updateFilters = () => {
         console.log("filters updated")
     }
 
-    render() {
-        return (
-            <PlacesContext.Provider value={{ places: this.state.places, updateFilters: this.updateFilters }}>    
-                <PlacesFilters />
-                <PlacesGrid />
-            </PlacesContext.Provider>
-        )
-    }
+    return (
+        <PlacesContext.Provider 
+            value={{ 
+                places,
+                updateFilters: updateFilters 
+            }}
+        >    
+            {/* <PlacesFilters /> */}
+            {/* <PlacesGrid /> */}
+        </PlacesContext.Provider>
+    )
 }
-
-export default withStyles(styles)(Places); 

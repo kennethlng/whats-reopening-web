@@ -10,6 +10,10 @@ import parse from 'autosuggest-highlight/parse';
 import * as api from '../../api'; 
 
 const styles = (theme) => ({
+    root: {
+        marginTop: theme.spacing(3),
+        marginBottom: theme.spacing(3)
+    },
     icon: {
         color: theme.palette.text.secondary,
         marginRight: theme.spacing(2),
@@ -44,7 +48,7 @@ class PlaceAutocomplete extends React.Component {
         this.setState({
             timeout: setTimeout(function() { 
                 _this.fetch(inputValue)
-            }, 750)
+            }, 350)
         })
     }
 
@@ -81,62 +85,63 @@ class PlaceAutocomplete extends React.Component {
     }
 
     render() {
-        const { googlePlacePrediction, options } = this.state; 
+        const { options } = this.state; 
         const { classes } = this.props; 
 
         return (
-            <AddPlaceContext.Consumer>
-                { (context) => (
-                    <Autocomplete
-                        options={options}
-                        getOptionLabel={(option) => (typeof option === 'string' ? option : option.description)}
-                        filterOptions={(x) => x}
-                        autoComplete
-                        includeInputInList
-                        filterSelectedOptions
-                        onInputChange={this.handleInputValueChange}
-                        onChange={this.handleChange}
-                        value={googlePlacePrediction}
-                        renderInput={(params) => 
-                            <TextField 
-                                {...params} 
-                                variant="outlined"
-                                fullWidth 
-                                label="Place name" 
-                                required 
-                                disabled={context.loading}
-                                helperText="As you start typing, select the option that best fits what you want."
-                            />
-                        }
-                        renderOption={(option) => {
-                            const matches = option.structured_formatting.main_text_matched_substrings;
-                            const parts = parse(
-                                option.structured_formatting.main_text,
-                                matches.map((match) => [match.offset, match.offset + match.length]),
-                            );
+            <div className={classes.root}>
+                <AddPlaceContext.Consumer>
+                    { (context) => (
+                        <Autocomplete
+                            options={options}
+                            getOptionLabel={(option) => (typeof option === 'string' ? option : option.description)}
+                            filterOptions={(x) => x}
+                            autoComplete
+                            includeInputInList
+                            filterSelectedOptions
+                            onInputChange={this.handleInputValueChange}
+                            onChange={this.handleChange}
+                            value={context.googlePlacePrediction}
+                            renderInput={(params) => 
+                                <TextField 
+                                    {...params} 
+                                    variant="outlined"
+                                    fullWidth 
+                                    label="Place name"  
+                                    disabled={context.loading}
+                                    helperText="As you start typing, select the option that best fits what you want."
+                                />
+                            }
+                            renderOption={(option) => {
+                                const matches = option.structured_formatting.main_text_matched_substrings;
+                                const parts = parse(
+                                    option.structured_formatting.main_text,
+                                    matches.map((match) => [match.offset, match.offset + match.length]),
+                                );
 
-                            return (
-                                <Grid container alignItems="center">
-                                    <Grid item>
-                                        <LocationOnIcon className={classes.icon} />
-                                    </Grid>
-                                    <Grid item xs>
-                                        {parts.map((part, index) => (
-                                            <span key={index} style={{ fontWeight: part.highlight ? 700 : 400 }}>
-                                                {part.text}
-                                            </span>
-                                        ))}
+                                return (
+                                    <Grid container alignItems="center">
+                                        <Grid item>
+                                            <LocationOnIcon className={classes.icon} />
+                                        </Grid>
+                                        <Grid item xs>
+                                            {parts.map((part, index) => (
+                                                <span key={index} style={{ fontWeight: part.highlight ? 700 : 400 }}>
+                                                    {part.text}
+                                                </span>
+                                            ))}
 
-                                        <Typography variant="body2" color="textSecondary">
-                                            {option.structured_formatting.secondary_text}
-                                        </Typography>
+                                            <Typography variant="body2" color="textSecondary">
+                                                {option.structured_formatting.secondary_text}
+                                            </Typography>
+                                        </Grid>
                                     </Grid>
-                                </Grid>
-                            )
-                        }}
-                    />
-                )}
-            </AddPlaceContext.Consumer>
+                                )
+                            }}
+                        />
+                    )}
+                </AddPlaceContext.Consumer>
+            </div>
         )
     }
 }

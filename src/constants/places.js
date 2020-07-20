@@ -1,9 +1,10 @@
 export const PLACES = "places"; 
-export const OPENING_DATE = "openingDate"; 
+export const OPENING_DATE = "reopeningDate"; 
 export const NAME = "name"; 
 export const STATUS = "status"; 
 export const IS_AFFILIATED = "isAffiliated"; 
 export const AFFILIATE = "affiliate"; 
+export const CONTACT = "contact";
 export const EMAIL = "email"; 
 export const NOTES = "notes"; 
 export const MAIN_TEXT = "mainText";

@@ -11,6 +11,7 @@ export default function OpeningDatePicker() {
 
     return (
         <FormControl fullWidth>
+            
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <KeyboardDatePicker
                     disabled={context.loading}
@@ -19,6 +20,7 @@ export default function OpeningDatePicker() {
                     variant="inline"
                     format="MM/dd/yyyy"
                     margin="normal"
+                    label="Reopening day"
                     value={context.openingDate}
                     onChange={handleChange}
                     KeyboardButtonProps={{
