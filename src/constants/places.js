@@ -10,3 +10,4 @@ export const NOTES = "notes";
 export const MAIN_TEXT = "mainText";
 export const SECONDARY_TEXT = "secondaryText";
 export const GOOGLE_PLACE_ID = "googlePlaceId"; 
+export const PHOTOS = "photos"; 

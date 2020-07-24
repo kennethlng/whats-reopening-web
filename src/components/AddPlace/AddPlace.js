@@ -47,7 +47,7 @@ export default function AddPlace() {
 
     const [loading, setLoading] = useState(false); 
     const [googlePlacePrediction, setGooglePlacePrediction] = useState(null); 
-    const [status, setStatus] = useState(STATUS.TEMPORARILY_CLOSED); 
+    const [status, setStatus] = useState(STATUS.TEMPORARILY_CLOSED.ID); 
     const [step, setStep] = useState(0); 
     const [openingDate, setOpeningDate] = useState(new Date(new Date().setHours(0, 0, 0, 0)));
     const [isAffiliated, setIsAffiliated] = useState(false); 

@@ -22,14 +22,14 @@ export default function PlacesGrid() {
     return (
         <div className={classes.root}>
             <Grid container spacing={3}>
-                <Grid container item xs={6} spacing={3}>
+                <Grid container item xs spacing={3}>
                     {context.places.map(place => (
                         <Grid item xs={12} key={place.id}>
                             <PlacesGridListCard place={place}/>
                         </Grid>
                     ))}
                 </Grid>
-                <Grid container item xs={6} spacing={3}>
+                <Grid container item lg={4} md={0} spacing={3}>
                     <Grid item>
                         Map
                     </Grid>

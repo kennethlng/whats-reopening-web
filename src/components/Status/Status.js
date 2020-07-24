@@ -2,20 +2,26 @@ import React from 'react';
 import * as STATUS from '../../constants/status'; 
 import Chip from '@material-ui/core/Chip';
 import { makeStyles } from '@material-ui/core/styles';
+import { green, lightGreen, orange, purple } from '@material-ui/core/colors';
 import Tooltip from '@material-ui/core/Tooltip';
+import PropTypes from 'prop-types'; 
 
 const useStyles = makeStyles(theme => ({
     [STATUS.OPEN.ID]: {
-        backgroundColor: green[500]
+        backgroundColor: green[500],
+        color: '#ffffff'
     },
-    [STATUS.LIMITED_OPEN]: {
-        backgroundColor: lightGreen[500]
+    [STATUS.LIMITED_OPEN.ID]: {
+        backgroundColor: lightGreen[500],
+        color: '#ffffff'
     },
-    [STATUS.TEMPORARILY_CLOSED]: {
-        backgroundColor: orange[500]
+    [STATUS.TEMPORARILY_CLOSED.ID]: {
+        backgroundColor: orange[500],
+        color: '#ffffff'
     },
-    [STATUS.PERMANENTLY_CLOSED]: {
-        backgroundColor: purple[500]
+    [STATUS.PERMANENTLY_CLOSED.ID]: {
+        backgroundColor: purple[500],
+        color: '#ffffff'
     }
 }))
 
@@ -50,8 +56,12 @@ export default function Status(props) {
         default: 
             return (
                 <Tooltip title="More information is needed">
-                    <Chip label={Uncertain} />
+                    <Chip label="Uncertain" />
                 </Tooltip>
             )
     }
+}
+
+Status.propTypes = {
+    status: PropTypes.string
 }

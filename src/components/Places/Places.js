@@ -31,7 +31,7 @@ export default function Places() {
             var places = []
             querySnapshot.forEach(function(doc) {
                 let data = doc.data()
-                let newPlace = new Place(doc.id, data.googlePlaceId, data.name)
+                let newPlace = new Place(doc.id, data)
                 places.push(newPlace)
             })
 
@@ -56,7 +56,7 @@ export default function Places() {
             }}
         >    
             {/* <PlacesFilters /> */}
-            {/* <PlacesGrid /> */}
+            <PlacesGrid />
         </PlacesContext.Provider>
     )
 }
