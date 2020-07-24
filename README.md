@@ -1,6 +1,6 @@
 # whats-reopening-web
 
-WhatsReopening.com is a community-driven website I'm developing to track places, their current status, and when they're reopening during COVID-19. 
+[WhatsReopening.com](https://whatsreopening.com) is a community-driven website I'm currently developing to track places (establishments, geographic locations, and prominent points of interest), their current status, and when they're reopening during COVID-19. This repo is just for the front-end. The backend functions can be found [here](https://github.com/narwhal-sightings/narwhal-cloud-functions).
 
 ## Stack
 
