@@ -14,11 +14,12 @@ export const placeAutocomplete = (input) => {
 }
 
 export const placePhoto = (photoReference, maxHeight) => {
+    
+
     return axios.get(CONSTANTS.GOOGLE_MAPS_PLACES_PHOTO_URL, {
         params: {
             photoReference,
             maxHeight
-            // key: "AIzaSyCL6zRyRrTnqsXXjlumfFI_ACSQINYhBCA"
         },
         responseType: 'arraybuffer'
     })

@@ -8,6 +8,7 @@ import * as CONSTANTS from '../../constants/places';
 import Status from '../Status'; 
 import Grid from '@material-ui/core/Grid'; 
 import * as api from '../../api/googleMaps'; 
+import * as KEYS from '../../constants/keys'; 
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -35,9 +36,8 @@ const useStyles = makeStyles(theme => ({
         // marginLeft: theme.spacing(1)
     }, 
     img: {
-        maxWidth: '100%',
-        maxHeight: '200px',
-        // margin: 'auto'
+        flex: 1,
+        maxWidth: '100%'
     }
 }))
 
@@ -47,11 +47,11 @@ export default function PlacesGridListCard(props) {
     const [image, setImage] = useState(null); 
     
     useEffect(() => {
-        api.placePhoto(place.photos[0]["photo_reference"], 200)
-        .then(response => {
-            var string = Buffer.from(response.data, 'binary').toString('base64');
-            setImage(string); 
-        })
+        // api.placePhoto(place.photos[0]["photo_reference"], 400)
+        // .then(response => {
+        //     var string = Buffer.from(response.data, 'binary').toString('base64');
+        //     setImage(string); 
+        // })
     }, [])
 
     const formatDate = () => {
@@ -62,15 +62,19 @@ export default function PlacesGridListCard(props) {
     return (
         <Grid container>
             <Grid item xs={12} sm={6} lg={4}>
-                <img className={classes.img} src={`data:image/jpeg;base64,${image}`} />
+                {/* <img className={classes.img} src={`data:image/jpeg;base64,${image}`} /> */}
+                <img className={classes.img} src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${place.photos[0]["photo_reference"]}&key=${KEYS.MAPS_API_KEY}`}/>
             </Grid>
             <Grid item xs container spacing={2} direction="column" justify="space-between" className={classes.details}>
                 <Grid item xs>
                     <Typography variant="h6">
                         {place[CONSTANTS.MAIN_TEXT]}
                     </Typography>
-                    <Typography variant="subtitle1">
+                    <Typography variant="caption">
                         {place[CONSTANTS.SECONDARY_TEXT]}
+                    </Typography>
+                    <Typography variant="subtitle1" noWrap>
+                        <i>{place[CONSTANTS.NOTES]}</i>
                     </Typography>
                 </Grid>
                 <Grid item container direction="row" alignItems="flex-end">
