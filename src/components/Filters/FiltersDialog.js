@@ -16,9 +16,7 @@ export default function FiltersDialog(props) {
     const [options, setOptions] = useState(INITIAL_STATE); 
     const filters = useContext(FiltersContext); 
 
-    useEffect(() => {
-        setOptions(filters.options); 
-    }, [])
+    const handleEnter = () => setOptions(filters.options); 
 
     const handleCancel = () => {
         onClose(); 
@@ -43,6 +41,7 @@ export default function FiltersDialog(props) {
         <div>
             <Dialog
                 open={open}
+                onEnter={handleEnter}
                 onClose={() => onClose()}
             >
                 <DialogTitle>Filters</DialogTitle>

@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import FiltersDialog from './FiltersDialog';
 import FiltersContext from './context'; 
 import { INITIAL_STATE } from './initialState'; 
+import ClearFiltersChip from './ClearFiltersChip'; 
 
 const useStyles = makeStyles((theme) => ({
     chips: {
@@ -24,6 +25,7 @@ export default function Filters() {
     useEffect(
         () => {
             updateFilters(); 
+            console.log(options); 
         }, 
         [options]
     )
@@ -43,8 +45,7 @@ export default function Filters() {
                         //  Loop through each status key value pair  
                         for (const s in value) {
                             const checked = value[s]; 
-                            console.log(s, checked)
-                            if (checked) string += `status[]=${s}`
+                            if (checked) string += `status[]=${s}&`
                         }
                         break; 
                     default: 
@@ -54,8 +55,7 @@ export default function Filters() {
         }
 
         history.push({
-            search: string,
-            
+            search: string
         })
     }
 
@@ -72,6 +72,7 @@ export default function Filters() {
                     onClick={handleMoreFiltersClick}
                     variant="outlined"
                 />
+                <ClearFiltersChip/>
             </div>
             <FiltersDialog
                 open={filtersDialogOpen}
