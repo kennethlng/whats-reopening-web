@@ -23,7 +23,7 @@ export default function Filters() {
 
     useEffect(
         () => {
-            console.log(options)
+            updateFilters(); 
         }, 
         [options]
     )
@@ -40,13 +40,11 @@ export default function Filters() {
             if (options.hasOwnProperty(property)) {
                 switch(property) {
                     case "status": 
-                        if (Array.isArray(value)) {
-                            value.forEach(item => {
-                                if (item) string += `status[]=${item}&` 
-                            })
-                            // string += `status[]=${value[0]}`
-                            // string += '&'
-                            // string += `status[]=${value[1]}`
+                        //  Loop through each status key value pair  
+                        for (const s in value) {
+                            const checked = value[s]; 
+                            console.log(s, checked)
+                            if (checked) string += `status[]=${s}`
                         }
                         break; 
                     default: 
@@ -65,11 +63,7 @@ export default function Filters() {
         <FiltersContext.Provider
             value={{
                 options,
-                updateOptions: (newOptions) => {
-                    // console.log(newOptions);
-                    // console.log({ ...options, ...newOptions });
-                    setOptions({ ...options, ...newOptions })
-                }
+                updateOptions: (newOptions) => setOptions({ ...options, ...newOptions })
             }}
         >
             <div className={classes.chips}>
