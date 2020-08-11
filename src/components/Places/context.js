@@ -2,7 +2,7 @@ import React from 'react';
 
 const PlacesContext = React.createContext({
     places: [],
-    updateFilters: () => null
+    page: 0
 });
 
 export { PlacesContext }

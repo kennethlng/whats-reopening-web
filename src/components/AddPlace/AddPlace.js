@@ -14,6 +14,7 @@ import { getSteps } from './steps';
 import Typography from '@material-ui/core/Typography'; 
 import * as STATUS from '../../constants/status'; 
 import * as CONSTANTS from '../../constants/places'; 
+import { INITIAL_STATE } from '../Types';
 
 const useStyles = makeStyles(theme => ({
     form: {
@@ -56,6 +57,7 @@ export default function AddPlace() {
     const [notes, setNotes] = useState(''); 
     const [snackbarMessage, setSnackbarMessage] = useState(''); 
     const [snackbarOpen, setSnackbarOpen] = useState(false); 
+    const [typeCheckedState, setTypeCheckedState] = useState(INITIAL_STATE); 
 
     const handleSubmit = () => {
         setLoading(true); 
@@ -65,12 +67,13 @@ export default function AddPlace() {
             [CONSTANTS.SECONDARY_TEXT]: googlePlacePrediction.structured_formatting.secondary_text,
             [CONSTANTS.GOOGLE_PLACE_ID]: googlePlacePrediction.place_id,
             [CONSTANTS.STATUS]: status,
-            [CONSTANTS.OPENING_DATE]: openingDate,
+            [CONSTANTS.REOPENING_DATE]: openingDate,
             [CONSTANTS.IS_AFFILIATED]: isAffiliated,
             [CONSTANTS.CONTACT]: {
                 [CONSTANTS.NAME]: contactName,
                 [CONSTANTS.EMAIL]: contactEmail
             },
+            [CONSTANTS.TYPES]: typeCheckedState,
             [CONSTANTS.NOTES]: notes
         })
         .then(function(docRef) {
@@ -99,6 +102,7 @@ export default function AddPlace() {
                 isAffiliated, 
                 contactName, 
                 contactEmail, 
+                typeCheckedState,
                 notes,
                 updateStep: (step) => setStep(step),
                 updateGooglePlacePrediction: (prediction) => setGooglePlacePrediction(prediction),
@@ -108,6 +112,7 @@ export default function AddPlace() {
                 updateContactName: (name) => setContactName(name),
                 updateContactEmail: (email) => setContactEmail(email),
                 updateNotes: (notes) => setNotes(notes),
+                updateTypeCheckedState: (state) => setTypeCheckedState(state),
                 submit: handleSubmit
             }}
         >

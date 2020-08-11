@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import { AddPlaceContext } from './context'; 
+import React from 'react';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -14,19 +13,18 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function StatusSelect() {
-    const context = useContext(AddPlaceContext); 
+export default function StatusSelect(props) {
     const classes = useStyles(); 
+    const { status, onChange } = props; 
 
-    const handleChange = (e) => context.updateStatus(e.target.value); 
+    const handleChange = e => onChange(e.target.value); 
 
     return (
         <React.Fragment>
             <FormControl variant="outlined" fullWidth>
                 <InputLabel>Current status</InputLabel>
                 <Select
-                    disabled={context.loading}
-                    value={context.status}
+                    value={status}
                     onChange={handleChange}
                 >
                     <MenuItem value={STATUS.OPEN.ID}>{STATUS.OPEN.TITLE}</MenuItem>
@@ -36,7 +34,7 @@ export default function StatusSelect() {
                     <MenuItem value={STATUS.OTHER.ID}>Other</MenuItem>
                 </Select>
             </FormControl>
-            {context.status === STATUS.OTHER ? 
+            {status === STATUS.OTHER ? 
                 <TextField
                     label="Describe your status"
                     fullWidth

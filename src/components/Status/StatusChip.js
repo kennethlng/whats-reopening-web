@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-export default function Status(props) {
+export default function StatusChip(props) {
     const classes = useStyles();
 
     switch(props.status) {
@@ -62,6 +62,6 @@ export default function Status(props) {
     }
 }
 
-Status.propTypes = {
+StatusChip.propTypes = {
     status: PropTypes.string
 }

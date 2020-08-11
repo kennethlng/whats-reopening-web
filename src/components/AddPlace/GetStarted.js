@@ -26,8 +26,7 @@ export default function GetStarted() {
                 Let's get started!
             </Typography>
             <Typography variant="subtitle1">
-                Your order number is #2001539. We have emailed your order confirmation, and will
-                send you an update when your order has shipped.
+                We're on a mission to get you the most updated information on your favorite places during COVID-19.
             </Typography>
             <PlaceAutocomplete/>
             <div className={classes.buttons}>

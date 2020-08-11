@@ -1,4 +1,5 @@
 import React from 'react';
+import { INITIAL_STATE } from '../Types';
 
 const AddPlaceContext = React.createContext({
     loading: false, 
@@ -9,16 +10,18 @@ const AddPlaceContext = React.createContext({
     isAffiliated: false,
     contactName: '',
     contactEmail: '',
+    typeCheckedState: INITIAL_STATE,
     notes: '',
-    updateStep: (step) => null,
-    updateStatus: (status) => null,
-    updateGooglePlacePrediction: (prediction) => null,
-    updateOpeningDate: (date) => null,
-    updateIsAffiliated: (isAffiliated) => null,
-    updateContactName: (name) => null,
-    updateContactEmail: (email) => null,
-    updateNotes: (notes) => null,
-    submit: () => null
+    updateStep: (step) => {},
+    updateStatus: (status) => {},
+    updateGooglePlacePrediction: (prediction) => {},
+    updateOpeningDate: (date) => {},
+    updateIsAffiliated: (isAffiliated) => {},
+    updateContactName: (name) => {},
+    updateContactEmail: (email) => {},
+    updateNotes: (notes) => {},
+    updateTypeCheckedState: (state) => {},
+    submit: () => {}
 });
 
 export const withAddPlace = Component => props => (

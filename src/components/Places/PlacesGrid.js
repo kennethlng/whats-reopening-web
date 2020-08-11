@@ -1,8 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import PlacesGridListCard from './PlacesGridListCard'; 
 import { makeStyles } from '@material-ui/core/styles';
-import { PlacesContext } from './context'; 
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -15,15 +14,15 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function PlacesGrid() {
+export default function PlacesGrid(props) {
+    const { places } = props; 
     const classes = useStyles();
-    const context = useContext(PlacesContext); 
 
     return (
         <div className={classes.root}>
             <Grid container spacing={3}>
                 <Grid container item xs spacing={3}>
-                    {context.places.map(place => (
+                    {places.map(place => (
                         <Grid item xs={12} key={place.id}>
                             <PlacesGridListCard place={place}/>
                         </Grid>

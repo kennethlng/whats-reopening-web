@@ -1,31 +1,47 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles'
+import { useLocation, useHistory } from 'react-router-dom'; 
 import { FirebaseContext } from '../Firebase'; 
 import Place from '../../models/Place';
 import PlacesGrid from './PlacesGrid';
 import { PlacesContext } from './context'; 
 import * as CONSTANTS from '../../constants/places'; 
-import PlacesFilters from './PlacesFilters'; 
-
-const useStyles = makeStyles(theme => ({
-
-}))
+import Filters from '../Filters/Filters';
 
 export default function Places() {
     const [loading, setLoading] = useState(false);
     const [places, setPlaces] = useState([]); 
     const firebase = useContext(FirebaseContext); 
+    const location = useLocation(); 
 
-    useEffect(() => {
-        fetch(); 
-    }, [])
+    useEffect(
+        () => {
+            fetch(); 
+        }, 
+        [location]
+    )
 
     const fetch = () => {
+        if (loading) return; 
+
         setLoading(true); 
 
         var query = firebase.places()
-        query = query.orderBy(CONSTANTS.OPENING_DATE)
+
+        const searchParams = new URLSearchParams(location.search); 
+
+        //  Filter by status
+        var status = searchParams.getAll("status[]"); 
+        if (status && status.length > 0) {
+            query = query.where('status', 'in', status); 
+        }
+
+        //  Sort by reopening date
+        query = query.orderBy(CONSTANTS.REOPENING_DATE)
+
+        //  Limit search results
         query = query.limit(10)
+
+        //  Perform query
         query.get()
         .then(function(querySnapshot) {
             var places = []
@@ -44,19 +60,12 @@ export default function Places() {
         })
     }
 
-    const updateFilters = () => {
-        console.log("filters updated")
-    }
-
     return (
-        <PlacesContext.Provider 
-            value={{ 
-                places,
-                updateFilters: updateFilters 
-            }}
-        >    
-            {/* <PlacesFilters /> */}
-            <PlacesGrid />
-        </PlacesContext.Provider>
+        <React.Fragment>
+            <Filters/>
+            <PlacesGrid 
+                places={places}
+            />
+        </React.Fragment>
     )
 }

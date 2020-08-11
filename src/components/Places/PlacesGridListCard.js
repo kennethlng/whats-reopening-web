@@ -5,7 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import * as CONSTANTS from '../../constants/places'; 
-import Status from '../Status'; 
+import { StatusChip } from '../Status'; 
 import Grid from '@material-ui/core/Grid'; 
 import * as api from '../../api/googleMaps'; 
 import * as KEYS from '../../constants/keys'; 
@@ -55,7 +55,7 @@ export default function PlacesGridListCard(props) {
     }, [])
 
     const formatDate = () => {
-        var formattedDate = place[CONSTANTS.OPENING_DATE].toISOString().substring(0, 10); 
+        var formattedDate = place[CONSTANTS.REOPENING_DATE].toISOString().substring(0, 10); 
         return formattedDate
     }
 
@@ -79,7 +79,7 @@ export default function PlacesGridListCard(props) {
                 </Grid>
                 <Grid item container direction="row" alignItems="flex-end">
                     <Grid item xs>
-                        <Status status={place[CONSTANTS.STATUS]} />
+                        <StatusChip status={place[CONSTANTS.STATUS]} />
                     </Grid>
                     <Grid item>
                         <Typography variant="body1">
