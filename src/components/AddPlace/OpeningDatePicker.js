@@ -17,7 +17,6 @@ export default function OpeningDatePicker() {
                     disabled={context.loading}
                     fullWidth
                     disableToolbar
-                    variant="inline"
                     format="MM/dd/yyyy"
                     margin="normal"
                     label="Reopening day"
