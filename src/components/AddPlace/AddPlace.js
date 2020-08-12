@@ -58,6 +58,7 @@ export default function AddPlace() {
     const [snackbarMessage, setSnackbarMessage] = useState(''); 
     const [snackbarOpen, setSnackbarOpen] = useState(false); 
     const [typeCheckedState, setTypeCheckedState] = useState(INITIAL_STATE); 
+    const [done, setDone] = useState(false); 
 
     const handleSubmit = () => {
         setLoading(true); 
@@ -77,7 +78,8 @@ export default function AddPlace() {
             [CONSTANTS.NOTES]: notes
         })
         .then(function(docRef) {
-            setLoading(false); 
+            setLoading(false);  
+            setDone(true); 
             setSnackbarMessage("Place successfully added");
             setSnackbarOpen(true); 
         })
@@ -104,6 +106,7 @@ export default function AddPlace() {
                 contactEmail, 
                 typeCheckedState,
                 notes,
+                done,
                 updateStep: (step) => setStep(step),
                 updateGooglePlacePrediction: (prediction) => setGooglePlacePrediction(prediction),
                 updateStatus: (status) => setStatus(status),
@@ -122,9 +125,8 @@ export default function AddPlace() {
                         Add a place
                     </Typography>
                     <React.Fragment>
-                        {step === steps.length ? (
-                            <ThankYou/>
-                        ) : 
+                        {done ? <ThankYou/>
+                            : 
                             <React.Fragment>
                                 <StepperProgress/>
                                 <StepperBody/>

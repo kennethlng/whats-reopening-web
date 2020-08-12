@@ -1,25 +1,34 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography'; 
 import Button from '@material-ui/core/Button'; 
+import { useHistory } from 'react-router-dom'; 
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+    button: {
+        marginTop: theme.spacing(3)
+    }
+}));
 
 export default function ThankYou() {
-    const handleClick = () => {
+    const classes = useStyles(); 
+    const history = useHistory(); 
 
-    }
+    const handleClick = () => history.go(0); // Reload page
 
     return (
         <React.Fragment>
             <Typography variant="h5" gutterBottom>
-                  Thank you for your order.
+                Thanks!
             </Typography>
             <Typography variant="subtitle1">
-                Your order number is #2001539. We have emailed your order confirmation, and will
-                send you an update when your order has shipped.
+                We appreciate your help supporting the community.
             </Typography>
             <Button
                 variant="contained"
                 color="secondary"
                 onClick={handleClick}
+                className={classes.button}
             >
                 Add another place
             </Button>

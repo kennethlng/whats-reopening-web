@@ -2,7 +2,6 @@ import React from 'react';
 import ContactForm from './ContactForm'; 
 import PlaceForm from './PlaceForm'; 
 import GetStarted from './GetStarted'; 
-import AdditionalInfoForm from './AdditionalInfoForm'; 
 
 export function getSteps() {
     return [

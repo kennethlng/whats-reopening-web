@@ -12,6 +12,7 @@ const AddPlaceContext = React.createContext({
     contactEmail: '',
     typeCheckedState: INITIAL_STATE,
     notes: '',
+    done: false,
     updateStep: (step) => {},
     updateStatus: (status) => {},
     updateGooglePlacePrediction: (prediction) => {},
