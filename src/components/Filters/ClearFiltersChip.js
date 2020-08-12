@@ -12,6 +12,6 @@ export default function ClearFiltersChip() {
     }
 
     return (
-        <Chip icon={<CancelRoundedIcon />} label="Clear filters" onClick={handleClick} />
+        <Chip variant="outlined" icon={<CancelRoundedIcon />} label="Clear filters" onClick={handleClick} />
     )
 }
