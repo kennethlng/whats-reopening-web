@@ -25,7 +25,6 @@ export default function Filters() {
     useEffect(
         () => {
             updateFilters(); 
-            console.log(options); 
         }, 
         [options]
     )
