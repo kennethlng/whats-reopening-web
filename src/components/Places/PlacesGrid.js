@@ -28,11 +28,11 @@ export default function PlacesGrid(props) {
                         </Grid>
                     ))}
                 </Grid>
-                <Grid container item lg={4} md={0} spacing={3}>
+                {/* <Grid container item lg={4} md={0} spacing={3}>
                     <Grid item>
                         Map
                     </Grid>
-                </Grid>
+                </Grid> */}
             </Grid>
         </div>
     )
