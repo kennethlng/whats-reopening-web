@@ -5,17 +5,28 @@ import { NavigationBar } from '../NavigationBar';
 import { Landing } from '../Landing'; 
 import { AddPlace } from '../AddPlace';
 import Container from '@material-ui/core/Container';
+import { makeStyles } from '@material-ui/core/styles';
 
-const Main = () => (
-    <div>
-        <NavigationBar/>
-        <Container maxWidth="lg">
-            <Switch>
-                <Route exact path={ROUTES.LANDING} component={Landing}/>
-                <Route path={ROUTES.ADD_PLACE} component={AddPlace}/>
-            </Switch>
-        </Container>
-    </div>
-)
+const useStyles = makeStyles(theme => ({
+    body: {
+        marginTop: theme.spacing(16)
+    }
+}))
+
+const Main = () => {
+    const classes = useStyles(); 
+
+    return (
+        <div>
+            <NavigationBar/>
+            <Container maxWidth="lg" className={classes.body}>
+                <Switch>
+                    <Route exact path={ROUTES.LANDING} component={Landing}/>
+                    <Route path={ROUTES.ADD_PLACE} component={AddPlace}/>
+                </Switch>
+            </Container>
+        </div>
+    )
+}
 
 export default Main; 

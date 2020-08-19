@@ -6,17 +6,27 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button'; 
 import { withRouter, useLocation } from 'react-router-dom'; 
 import * as ROUTES from '../../constants/routes';
+import logo from '../../assets/images/logo.png';
+import RoomIcon from '@material-ui/icons/Room';
+import Container from '@material-ui/core/Container';
 
 const useStyles = makeStyles(theme => ({ 
     root: {
         flexGrow: 1,
+    },
+    bar: {
+        background: '#ffffff'
     },
     menuButton: {
         marginRight: theme.spacing(2),
     },
     spacer: {
         flexGrow: 1,
-    }  
+    },
+    logo: {
+        textTransform: "none",
+        color: "#00a3ff"
+    }
 }))
 
 function NavigationBar(props) {
@@ -28,22 +38,25 @@ function NavigationBar(props) {
 
     return (
         <div className={classes.root}>
-            <AppBar position="static">
-                <Toolbar>
-                    <Button color="inherit" onClick={handleLogoClick}> 
-                        <Typography variant="h6">
-                            What's Reopening
-                        </Typography>
-                    </Button>
-                    <div className={classes.spacer}/>
-                    {location.pathname === ROUTES.ADD_PLACE ? 
-                        null
-                        :
-                        <Button color="inherit" onClick={handleAddPlaceClick}>
-                            Add a place
+            <AppBar className={classes.bar} position="fixed" elevation={0}>
+                <Container maxWidth="lg">
+                    <Toolbar disableGutters>
+                        <Button className={classes.logo} color="inherit" onClick={handleLogoClick}> 
+                            <RoomIcon/>
+                            <Typography variant="h5">
+                                <b>WhatsReopening.com</b>
+                            </Typography>
                         </Button>
-                    }
-                </Toolbar>
+                        <div className={classes.spacer}/>
+                        {location.pathname === ROUTES.ADD_PLACE ? 
+                            null
+                            :
+                            <Button disableElevation variant="contained" onClick={handleAddPlaceClick}>
+                                Add a place
+                            </Button>
+                        }
+                    </Toolbar>
+                </Container>
             </AppBar>
         </div>
     )

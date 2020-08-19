@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
         width: 200
     },
     details: {
-        padding: theme.spacing(2)
+        // padding: theme.spacing(2)
         // display: 'flex',
         // flexDirection: 'column',
         // width: '100%'
@@ -60,24 +60,23 @@ export default function PlacesGridListCard(props) {
     }
 
     return (
-        <Grid container>
-            <Grid item xs={12} sm={6} lg={4}>
-                {/* <img className={classes.img} src={`data:image/jpeg;base64,${image}`} /> */}
+        <Grid container item direction="column">
+            <Grid item>
                 <img className={classes.img} src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${place.photos[0]["photo_reference"]}&key=${KEYS.MAPS_API_KEY}`}/>
             </Grid>
             <Grid item xs container spacing={2} direction="column" justify="space-between" className={classes.details}>
                 <Grid item xs>
-                    <Typography variant="h6">
+                    <Typography variant="body1">
                         {place[CONSTANTS.MAIN_TEXT]}
                     </Typography>
-                    <Typography variant="caption">
+                    {/* <Typography variant="caption">
                         {place[CONSTANTS.SECONDARY_TEXT]}
-                    </Typography>
+                    </Typography> */}
                     <Typography variant="subtitle1" noWrap>
                         <i>{place[CONSTANTS.NOTES]}</i>
                     </Typography>
                 </Grid>
-                <Grid item container direction="row" alignItems="flex-end">
+                {/* <Grid item container direction="row" alignItems="flex-end">
                     <Grid item xs>
                         <StatusChip status={place[CONSTANTS.STATUS]} />
                     </Grid>
@@ -86,26 +85,8 @@ export default function PlacesGridListCard(props) {
                             Reopening <b>{formatDate()}</b>
                         </Typography>
                     </Grid>
-                </Grid>
+                </Grid> */}
             </Grid>
         </Grid>
-
-        // <Card className={classes.root}>
-        //     <CardMedia
-        //         className={classes.cover}
-        //         title=""
-        //     />
-        //     <div className={classes.details}>
-        //         <CardContent className={classes.content}>
-        //             <Grid container>
-        //                 <Grid item xs>
-                            
-        //                 </Grid>
-        //                 <Grid item className={classes.date}>
-        //                 </Grid>
-        //             </Grid>
-        //         </CardContent>
-        //     </div>
-        // </Card>
     )
 }

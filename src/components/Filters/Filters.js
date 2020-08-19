@@ -10,7 +10,7 @@ import ClearFiltersChip from './ClearFiltersChip';
 const useStyles = makeStyles((theme) => ({
     chips: {
         '& > *': {
-            margin: theme.spacing(1),
+            marginRight: theme.spacing(1),
         },
         marginBottom: theme.spacing(3)
     },
