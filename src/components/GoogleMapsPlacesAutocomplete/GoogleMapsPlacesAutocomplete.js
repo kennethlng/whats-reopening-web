@@ -8,6 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import parse from 'autosuggest-highlight/parse';
 import throttle from 'lodash/throttle';
 import * as KEYS from '../../constants/keys'; 
+import SearchIcon from '@material-ui/icons/Search';
 
 function loadScript(src, position, id) {
     if (!position) {
@@ -28,6 +29,37 @@ const useStyles = makeStyles((theme) => ({
         color: theme.palette.text.secondary,
         marginRight: theme.spacing(2),
     },
+    searchIcon: {
+        padding: theme.spacing(0, 2),
+        height: '100%',
+        position: 'absolute',
+        pointerEvents: 'none',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+    textField: {
+        marginLeft: theme.spacing(2),
+        border: '1px solid #e2e2e1',
+        borderColor: 'transparent',
+        border: '0px',
+        borderRadius: 16,
+        backgroundColor: '#EEEEEE',
+        padding: theme.spacing(1, 2, 1, 2),
+        // paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+        // [theme.breakpoints.up('md')]: {
+        //     width: '20ch',
+        // },
+        transition: theme.transitions.create(['border-color', 'box-shadow']),
+        '&:hover': {
+            backgroundColor: '#e2e2e1',
+        },
+        '&$focused': {
+            backgroundColor: '#e2e2e1',
+            // boxShadow: `${fade(theme.palette.primary.main, 0.25)} 0 0 0 2px`,
+            borderColor: theme.palette.primary.main,
+        },
+    }
 }));
 
 export default function GoogleMapsPlacesAutocomplete() {
@@ -112,7 +144,8 @@ export default function GoogleMapsPlacesAutocomplete() {
                 setInputValue(newInputValue);
             }}
             renderInput={(params) => (
-                <TextField {...params} label="Add a location" variant="outlined" fullWidth />
+                // <TextField className={classes.textField} {...params} InputProps={{ classes, disableUnderline: true }} placeholder="Add a location" variant="standard" fullWidth />
+                <TextField className={classes.textField} {...params} InputProps={{ disableUnderline: true }} placeholder="Add a location..." variant="standard" fullWidth />
             )}
             renderOption={(option) => {
                 const matches = option.structured_formatting.main_text_matched_substrings;
