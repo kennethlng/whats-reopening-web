@@ -70,7 +70,7 @@ export default function PlacesGrid(props) {
                                     <ListItemText primary={place[CONSTANTS.SECONDARY_TEXT]}/>
                                 </ListItem>
                             </List> */}
-                            <Grid container item spacing={1}>
+                            <Grid container item spacing={1} alignItems="center">
                                 <Grid item>
                                     <EventRoundedIcon/>
                                 </Grid>
@@ -82,7 +82,7 @@ export default function PlacesGrid(props) {
                                     </Tooltip>
                                 </Grid>
                             </Grid>
-                            <Grid container item spacing={1}>
+                            <Grid container item spacing={1} alignItems="center">
                                 <Grid item>
                                     <RoomRoundedIcon/>
                                 </Grid>
