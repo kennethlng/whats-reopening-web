@@ -9,6 +9,7 @@ import * as ROUTES from '../../constants/routes';
 import logo from '../../assets/images/logo.png';
 import RoomIcon from '@material-ui/icons/Room';
 import Container from '@material-ui/core/Container';
+import { GoogleMapsPlacesAutocomplete } from '../GoogleMapsPlacesAutocomplete'
 
 const useStyles = makeStyles(theme => ({ 
     root: {

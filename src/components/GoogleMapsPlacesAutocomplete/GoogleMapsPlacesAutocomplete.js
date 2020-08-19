@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function GoogleMaps() {
+export default function GoogleMapsPlacesAutocomplete() {
     const classes = useStyles();
     const [value, setValue] = React.useState(null);
     const [inputValue, setInputValue] = React.useState('');
