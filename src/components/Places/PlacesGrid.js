@@ -86,8 +86,8 @@ export default function PlacesGrid(props) {
                                 <Grid item>
                                     <RoomRoundedIcon/>
                                 </Grid>
-                                <Grid item xs>
-                                    <Typography variant="body2">
+                                <Grid item xs zeroMinWidth>
+                                    <Typography variant="body2" noWrap>
                                         <Link color="inherit">{place[CONSTANTS.SECONDARY_TEXT]}</Link>
                                     </Typography>
                                 </Grid>
