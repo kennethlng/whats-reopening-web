@@ -15,6 +15,10 @@ const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
     },
+    toolbar: {
+        paddingTop: theme.spacing(1),
+        paddingBottom: theme.spacing(1)
+    },
     bar: {
         background: '#ffffff'
     },
@@ -41,13 +45,14 @@ function NavigationBar(props) {
         <div className={classes.root}>
             <AppBar className={classes.bar} position="fixed" elevation={0}>
                 <Container maxWidth="lg">
-                    <Toolbar disableGutters>
+                    <Toolbar disableGutters className={classes.toolbar}>
                         <Button className={classes.logo} color="inherit" onClick={handleLogoClick}> 
                             <RoomIcon/>
                             <Typography variant="h5">
                                 <b>WhatsReopening.com</b>
                             </Typography>
                         </Button>
+                        <GoogleMapsPlacesAutocomplete />
                         <div className={classes.spacer}/>
                         {location.pathname === ROUTES.ADD_PLACE ? 
                             null
