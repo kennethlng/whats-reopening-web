@@ -6,6 +6,7 @@ import { Landing } from '../Landing';
 import { AddPlace } from '../AddPlace';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
+import { Footer } from '../Footer'; 
 
 const useStyles = makeStyles(theme => ({
     body: {
@@ -25,6 +26,7 @@ const Main = () => {
                     <Route path={ROUTES.ADD_PLACE} component={AddPlace}/>
                 </Switch>
             </Container>
+            <Footer/>
         </div>
     )
 }
