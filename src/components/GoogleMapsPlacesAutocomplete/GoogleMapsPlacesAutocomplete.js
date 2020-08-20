@@ -9,6 +9,7 @@ import parse from 'autosuggest-highlight/parse';
 import throttle from 'lodash/throttle';
 import * as KEYS from '../../constants/keys'; 
 import SearchIcon from '@material-ui/icons/Search';
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 function loadScript(src, position, id) {
     if (!position) {
@@ -62,8 +63,9 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function GoogleMapsPlacesAutocomplete() {
+export default function GoogleMapsPlacesAutocomplete(props) {
     const classes = useStyles();
+    const { onChange } = props;
     const [value, setValue] = React.useState(null);
     const [inputValue, setInputValue] = React.useState('');
     const [options, setOptions] = React.useState([]);
@@ -139,13 +141,28 @@ export default function GoogleMapsPlacesAutocomplete() {
             onChange={(event, newValue) => {
                 setOptions(newValue ? [newValue, ...options] : options);
                 setValue(newValue);
+                onChange(newValue);
             }}
             onInputChange={(event, newInputValue) => {
                 setInputValue(newInputValue);
             }}
             renderInput={(params) => (
-                // <TextField className={classes.textField} {...params} InputProps={{ classes, disableUnderline: true }} placeholder="Add a location" variant="standard" fullWidth />
-                <TextField className={classes.textField} {...params} InputProps={{ disableUnderline: true }} placeholder="Add a location..." variant="standard" fullWidth />
+                <TextField 
+                    className={classes.textField} 
+                    {...params} 
+                    placeholder="Add a location..." 
+                    variant="standard" 
+                    fullWidth 
+                    InputProps={{
+                        ...params.InputProps,
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <SearchIcon/>
+                            </InputAdornment>
+                        ),
+                        disableUnderline: true
+                    }}
+                />
             )}
             renderOption={(option) => {
                 const matches = option.structured_formatting.main_text_matched_substrings;
@@ -175,4 +192,8 @@ export default function GoogleMapsPlacesAutocomplete() {
             }}
         />
     );
+}
+
+GoogleMapsPlacesAutocomplete.defaultProps = {
+    onChange: () => {}
 }
