@@ -29,7 +29,7 @@ export default function StatusCheckboxGroup(props) {
                     />
                 ))}
             </FormGroup>
-            <FormHelperText>Be careful</FormHelperText>
+            {/* <FormHelperText>Be careful</FormHelperText> */}
         </FormControl>
     )
 }
