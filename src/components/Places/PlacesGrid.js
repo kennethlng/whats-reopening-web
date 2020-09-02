@@ -56,7 +56,7 @@ export default function PlacesGrid(props) {
                             <Card>
                                 <CardMedia
                                     className={classes.img}
-                                    image={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${place.photos[0]["photo_reference"]}&key=${KEYS.MAPS_API_KEY}`}
+                                    image={place.photos ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${place.photos[0]["photo_reference"]}&key=${KEYS.MAPS_API_KEY}` : '../../assets/images/blank.png'}
                                     title=""
                                 />
                                 <CardContent>
