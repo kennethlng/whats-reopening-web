@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
@@ -10,6 +10,7 @@ import throttle from 'lodash/throttle';
 import * as KEYS from '../../constants/keys'; 
 import SearchIcon from '@material-ui/icons/Search';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import GoogleMapsPlacesAutocompleteContext from './context'; 
 
 function loadScript(src, position, id) {
     if (!position) {
@@ -66,6 +67,7 @@ const useStyles = makeStyles((theme) => ({
 export default function GoogleMapsPlacesAutocomplete(props) {
     const classes = useStyles();
     const { onChange } = props;
+    const googleMapsPlacesAutocomplete = useContext(GoogleMapsPlacesAutocompleteContext); 
     const [value, setValue] = React.useState(null);
     const [inputValue, setInputValue] = React.useState('');
     const [options, setOptions] = React.useState([]);
@@ -142,6 +144,7 @@ export default function GoogleMapsPlacesAutocomplete(props) {
                 setOptions(newValue ? [newValue, ...options] : options);
                 setValue(newValue);
                 onChange(newValue);
+                googleMapsPlacesAutocomplete.updatePrediction(newValue); 
             }}
             onInputChange={(event, newInputValue) => {
                 setInputValue(newInputValue);

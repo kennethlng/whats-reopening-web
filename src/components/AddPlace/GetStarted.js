@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import PlaceAutocomplete from './PlaceAutocomplete'; 
 import { AddPlaceContext } from './context'; 
 import { makeStyles } from '@material-ui/core/styles';
+import { GoogleMapsPlacesAutocomplete } from '../GoogleMapsPlacesAutocomplete';
 
 const useStyles = makeStyles((theme) => ({
     buttons: {
@@ -28,7 +29,9 @@ export default function GetStarted() {
             <Typography variant="subtitle1">
                 We're on a mission to get you the most updated information on your favorite places during COVID-19.
             </Typography>
-            <PlaceAutocomplete/>
+            <GoogleMapsPlacesAutocomplete
+                onChange={(prediction) => addPlace.updateGooglePlacePrediction(prediction)}
+            />
             <div className={classes.buttons}>
                 <div className={classes.spacer}/>
                 <Button
