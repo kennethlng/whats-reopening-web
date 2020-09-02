@@ -52,7 +52,6 @@ function NavigationBar(props) {
                                 <b>WhatsReopening.com</b>
                             </Typography>
                         </Button>
-                        <GoogleMapsPlacesAutocomplete />
                         <div className={classes.spacer}/>
                         {location.pathname === ROUTES.ADD_PLACE ? 
                             null
