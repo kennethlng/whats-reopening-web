@@ -41,17 +41,14 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'center',
       },
     textField: {
-        marginLeft: theme.spacing(2),
-        border: '1px solid #e2e2e1',
-        borderColor: 'transparent',
-        border: '0px',
-        borderRadius: 16,
-        backgroundColor: '#EEEEEE',
-        padding: theme.spacing(1, 2, 1, 2),
-        // paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-        // [theme.breakpoints.up('md')]: {
-        //     width: '20ch',
-        // },
+        // marginLeft: theme.spacing(2),
+        // border: '1px solid #e2e2e1',
+        // borderColor: 'transparent',
+        // border: '0px',
+        // borderRadius: 16,
+        // backgroundColor: '#EEEEEE',
+        // padding: theme.spacing(1, 2, 1, 2),
+        marginTop: theme.spacing(5),
         transition: theme.transitions.create(['border-color', 'box-shadow']),
         '&:hover': {
             backgroundColor: '#e2e2e1',
@@ -132,7 +129,6 @@ export default function GoogleMapsPlacesAutocomplete(props) {
     return (
         <Autocomplete
             id="google-map-demo"
-            style={{ width: 300 }}
             getOptionLabel={(option) => (typeof option === 'string' ? option : option.description)}
             filterOptions={(x) => x}
             options={options}
@@ -163,7 +159,7 @@ export default function GoogleMapsPlacesAutocomplete(props) {
                                 <SearchIcon/>
                             </InputAdornment>
                         ),
-                        disableUnderline: true
+                        // disableUnderline: true
                     }}
                 />
             )}
