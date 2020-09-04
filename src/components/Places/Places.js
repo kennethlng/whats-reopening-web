@@ -39,7 +39,7 @@ export default function Places() {
         query = query.orderBy(CONSTANTS.REOPENING_DATE)
 
         //  Limit search results
-        query = query.limit(10)
+        query = query.limit(12)
 
         //  Perform query
         query.get()
