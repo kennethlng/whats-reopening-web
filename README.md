@@ -14,10 +14,10 @@ The website is built with React for the front-end and Firebase (Firestore, Cloud
 
 In order for users to add places to the website, they must first search for the place to see if it exists using the Google Maps Places autocomplete textfield. This prevents the database from being clouded with duplicate or poor entries.
 
-![](/https://github.com/narwhal-sightings/whats-reopening-web/blob/master/src/assets/images/Screen%20Shot%202020-09-04%20at%203.34.18%20PM.png)
+![](https://github.com/narwhal-sightings/whats-reopening-web/blob/master/src/assets/images/Screen%20Shot%202020-09-04%20at%203.34.18%20PM.png)
 
 ### Shareable Links
 
 Each filter that is applied is included as a URL parameter. The front page listens for changes to the URL to perform the appropraite query to the database. This allows users to share the places they are querying with others.
 
-![](/https://github.com/narwhal-sightings/whats-reopening-web/blob/master/src/assets/images/Screen%20Shot%202020-09-04%20at%203.55.55%20PM.png)
+![](https://github.com/narwhal-sightings/whats-reopening-web/blob/master/src/assets/images/Screen%20Shot%202020-09-04%20at%203.55.55%20PM.png)
