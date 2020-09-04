@@ -6,4 +6,14 @@
 
 ## Stack
 
-I'm using React for the front-end, Cloud Firestore for the NoSQL database, and Cloud Functions for the backend functions. Submitted places are verified using Google Maps Places API. 
+The website is built with React for the front-end and Firebase (Firestore, Cloud Functions) for the backend. I’m using Material UI for the UI framework. Location data, photos, and the map are powered by Google Maps API.
+
+## Features
+
+### Place Verification using Google Maps API
+
+In order for users to add places to the website, they must first search for the place to see if it exists using the Google Maps Places autocomplete textfield. This prevents the database from being clouded with duplicate or poor entries.
+
+### Shareable Links
+
+Each filter that is applied is included as a URL parameter. The front page listens for changes to the URL to perform the appropraite query to the database. This allows users to share the places they are querying with others.
